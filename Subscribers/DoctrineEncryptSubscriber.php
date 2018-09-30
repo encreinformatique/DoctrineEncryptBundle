@@ -230,7 +230,6 @@ class DoctrineEncryptSubscriber implements EventSubscriber
                 /**
                  * If property is an normal value and contains the Encrypt tag, lets encrypt/decrypt that property
                  */
-                if ($this->annReader->getPropertyAnnotation($refProperty, self::ENCRYPTED_ANN_NAME)) {
                     $pac = PropertyAccess::createPropertyAccessor();
                     $value = $pac->getValue($entity, $refProperty->getName());
                     if ($encryptorMethod == 'decrypt') {
