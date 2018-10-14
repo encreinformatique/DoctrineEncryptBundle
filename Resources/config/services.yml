@@ -36,3 +36,5 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@annotation_reader"
             - "@ambta_doctrine_encrypt.subscriber"
+
+    Ambta\DoctrineEncryptBundle\Encryptors\EncryptorInterface: '@ambta_doctrine_encrypt.encryptor'
