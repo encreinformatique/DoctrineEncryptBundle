@@ -1,11 +1,18 @@
-# michaeldegroot/DoctrineEncryptBundle
+[![Logo](https://i.imgur.com/sfmU6wt.png)](https://github.com/michaeldegroot/DoctrineEncryptBundle) 
 
-This is an fork from the original bundle created by ambta which can be found here:
+[![Build status](https://travis-ci.org/michaeldegroot/DoctrineEncryptBundle.svg?branch=master)](https://travis-ci.org/michaeldegroot/DoctrineEncryptBundle) 
+[![License](https://img.shields.io/github/license/michaeldegroot/DoctrineEncryptBundle.svg)](https://raw.githubusercontent.com/michaeldegroot/DoctrineEncryptBundle/master/LICENSE) 
+[![Latest version](https://poser.pugx.org/michaeldegroot/doctrine-encrypt-bundle/version)](https://packagist.org/packages/michaeldegroot/doctrine-encrypt-bundle) 
+[![Latest Unstable Version](https://poser.pugx.org/michaeldegroot/doctrine-encrypt-bundle/v/unstable)](https://packagist.org/packages/michaeldegroot/doctrine-encrypt-bundle) 
+[![Total downloads](https://poser.pugx.org/michaeldegroot/doctrine-encrypt-bundle/downloads)](https://packagist.org/packages/michaeldegroot/doctrine-encrypt-bundle) 
+[![Downloads this month](https://poser.pugx.org/michaeldegroot/doctrine-encrypt-bundle/d/monthly)](https://packagist.org/packages/michaeldegroot/doctrine-encrypt-bundle) 
+
+### Introduction
+
+This is a fork from the original bundle created by ambta which can be found here:
 [ambta/DoctrineEncryptBundle](https://github.com/ambta/DoctrineEncryptBundle)
 
 This bundle has updated security by not rolling it's own encryption and using verified standardized library's from the field.
-
-ambta/DoctrineEncryptBundle is **not** secured, It uses old crypto functions and programming mistakes like supplying a IV in ECB mode (which does nothing)
 
 ### Using [Halite](https://github.com/paragonie/halite)
 
@@ -32,6 +39,8 @@ ambta_doctrine_encrypt:
 
 
 ### Secret key
+
+The secret key should be a max 32 byte hexadecimal string (`[0-9a-fA-F]`).
 
 Secret key is generated if there is no key found. This is automatically generated and stored in the folder defined in the configuration
 

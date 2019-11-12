@@ -3,9 +3,7 @@
 namespace Ambta\DoctrineEncryptBundle\Encryptors;
 
 use \ParagonIE\Halite\HiddenString;
-use \ParagonIE\Halite\EncryptionKey;
 use \ParagonIE\Halite\KeyFactory;
-use \ParagonIE\Halite\Symmetric\Crypto;
 
 /**
  * Class for encrypting and decrypting with the halite library
@@ -23,7 +21,6 @@ class HaliteEncryptor implements EncryptorInterface
      */
     public function __construct(string $keyFile)
     {
-        $this->encryptionKey = null;
         $this->keyFile = $keyFile;
     }
 
@@ -40,7 +37,14 @@ class HaliteEncryptor implements EncryptorInterface
      */
     public function decrypt($data)
     {
-        return \ParagonIE\Halite\Symmetric\Crypto::decrypt($data, $this->getKey());
+        $data = \ParagonIE\Halite\Symmetric\Crypto::decrypt($data, $this->getKey());
+
+        if ($data instanceof HiddenString)
+        {
+            $data = $data->getString();
+        }
+
+        return $data;
     }
 
     private function getKey()
