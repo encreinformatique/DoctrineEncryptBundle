@@ -224,6 +224,9 @@ class DoctrineEncryptSubscriber implements EventSubscriber
                  */
                 $pac = PropertyAccess::createPropertyAccessor();
                 $value = $pac->getValue($entity, $refProperty->getName());
+                if (is_object($value)) {
+                    continue;
+                }
                 if ($encryptorMethod == 'decrypt') {
                     if (!is_null($value) and !empty($value)) {
                         if (substr($value, -strlen(self::ENCRYPTION_MARKER)) == self::ENCRYPTION_MARKER) {
