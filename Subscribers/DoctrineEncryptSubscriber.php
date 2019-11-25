@@ -222,22 +222,24 @@ class DoctrineEncryptSubscriber implements EventSubscriber
                 /**
                  * If property is an normal value and contains the Encrypt tag, lets encrypt/decrypt that property
                  */
-                $pac = PropertyAccess::createPropertyAccessor();
-                $value = $pac->getValue($entity, $refProperty->getName());
-                if ($encryptorMethod == 'decrypt') {
-                    if (!is_null($value) and !empty($value)) {
-                        if (substr($value, -strlen(self::ENCRYPTION_MARKER)) == self::ENCRYPTION_MARKER) {
-                            $this->decryptCounter++;
-                            $currentPropValue = $this->encryptor->decrypt(substr($value, 0, -5));
-                            $pac->setValue($entity, $refProperty->getName(), $currentPropValue);
+                if ($this->annReader->getPropertyAnnotation($refProperty, self::ENCRYPTED_ANN_NAME)) {
+                    $pac = PropertyAccess::createPropertyAccessor();
+                    $value = $pac->getValue($entity, $refProperty->getName());
+                    if ($encryptorMethod == 'decrypt') {
+                        if (!is_null($value) and !empty($value)) {
+                            if (substr($value, -strlen(self::ENCRYPTION_MARKER)) == self::ENCRYPTION_MARKER) {
+                                $this->decryptCounter++;
+                                $currentPropValue = $this->encryptor->decrypt(substr($value, 0, -5));
+                                $pac->setValue($entity, $refProperty->getName(), $currentPropValue);
+                            }
                         }
-                    }
-                } else {
-                    if (!is_null($value) and !empty($value)) {
-                        if (substr($value, -strlen(self::ENCRYPTION_MARKER)) != self::ENCRYPTION_MARKER) {
-                            $this->encryptCounter++;
-                            $currentPropValue = $this->encryptor->encrypt($value).self::ENCRYPTION_MARKER;
-                            $pac->setValue($entity, $refProperty->getName(), $currentPropValue);
+                    } else {
+                        if (!is_null($value) and !empty($value)) {
+                            if (substr($value, -strlen(self::ENCRYPTION_MARKER)) != self::ENCRYPTION_MARKER) {
+                                $this->encryptCounter++;
+                                $currentPropValue = $this->encryptor->encrypt($value).self::ENCRYPTION_MARKER;
+                                $pac->setValue($entity, $refProperty->getName(), $currentPropValue);
+                            }
                         }
                     }
                 }
