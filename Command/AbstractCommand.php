@@ -3,7 +3,6 @@ namespace Ambta\DoctrineEncryptBundle\Command;
 
 use Ambta\DoctrineEncryptBundle\Subscribers\DoctrineEncryptSubscriber;
 use Doctrine\Common\Annotations\Reader;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Symfony\Component\Console\Command\Command;
@@ -33,12 +32,12 @@ abstract class AbstractCommand extends Command
     /**
      * AbstractCommand constructor.
      *
-     * @param EntityManager             $entityManager
+     * @param EntityManagerInterface    $entityManager
      * @param Reader                    $annotationReader
      * @param DoctrineEncryptSubscriber $subscriber
      */
     public function __construct(
-        EntityManager $entityManager,
+        EntityManagerInterface $entityManager,
         Reader $annotationReader,
         DoctrineEncryptSubscriber $subscriber
     ) {
